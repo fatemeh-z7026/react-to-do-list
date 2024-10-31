@@ -3,6 +3,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 
 export default class ToDo extends Component {
+  delete(id) {
+    this.props.remove(id);
+  }
+
   render() {
     return (
       // 'completed' class for completed todos
@@ -12,7 +16,12 @@ export default class ToDo extends Component {
           <FontAwesomeIcon icon={faCheck} />
         </button>
 
-        <button className="trash-btn">
+        <button
+          className="trash-btn"
+          onClick={() => {
+            this.delete(this.props.id);
+          }}
+        >
           <FontAwesomeIcon icon={faTrashCan} />
         </button>
       </div>

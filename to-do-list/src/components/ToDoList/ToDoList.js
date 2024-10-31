@@ -12,12 +12,13 @@ export default class ToDoList extends Component {
       toDoTitle: "",
       status: "all",
     };
+    this.removeToDo = this.removeToDo.bind(this);
   }
 
   toDoTitleHandler(event) {
     this.setState({
       toDoTitle: event.target.value,
-    })
+    });
   }
   addToList(event) {
     event.preventDefault();
@@ -28,9 +29,15 @@ export default class ToDoList extends Component {
     };
     this.setState((prevState) => ({
       toDoList: [...prevState.toDoList, newTask], // Append the new task to the todo array
-      toDoTitle:''
+      toDoTitle: "",
     }));
-  
+  }
+  removeToDo(todoId) {
+    console.log("", todoId);
+    let remainingToDo = this.state.toDoList.filter((todo) => todo.id !== todoId);
+    this.setState({
+      toDoList: remainingToDo,
+    });
   }
   render() {
     return (
@@ -63,8 +70,9 @@ export default class ToDoList extends Component {
 
         <div className="todo-container">
           <ul className="todo-list" id="todo">
-            {this.state.toDoList.map((todo)=>(  <ToDo key={todo.id} {...todo}/>))}
-          
+            {this.state.toDoList.map((todo) => (
+              <ToDo key={todo.id} {...todo} remove={this.removeToDo} />
+            ))}
           </ul>
         </div>
       </div>
