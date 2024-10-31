@@ -9,11 +9,11 @@ export default class ToDo extends Component {
       <div className="todo" style={{ display: "flex" }}>
         <li className="todo-item">{this.props.title}</li>
         <button className="check-btn">
-        <FontAwesomeIcon icon={faCheck} />
+          <FontAwesomeIcon icon={faCheck} />
         </button>
 
         <button className="trash-btn">
-        <FontAwesomeIcon icon={faTrashCan} />
+          <FontAwesomeIcon icon={faTrashCan} />
         </button>
       </div>
     );
