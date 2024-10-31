@@ -13,6 +13,7 @@ export default class ToDoList extends Component {
       status: "all",
     };
     this.removeToDo = this.removeToDo.bind(this);
+    this.completeToDo = this.completeToDo.bind(this);
   }
 
   toDoTitleHandler(event) {
@@ -34,9 +35,25 @@ export default class ToDoList extends Component {
   }
   removeToDo(todoId) {
     console.log("", todoId);
-    let remainingToDo = this.state.toDoList.filter((todo) => todo.id !== todoId);
+    let remainingToDo = this.state.toDoList.filter(
+      (todo) => todo.id !== todoId
+    );
     this.setState({
       toDoList: remainingToDo,
+    });
+  }
+
+  completeToDo(todoId) {
+    console.log(todoId);
+
+    let newTodoList = [...this.state.toDoList];
+    newTodoList.forEach((todo) => {
+      if (todo.id === todoId) {
+        todo.completed = !todo.completed;
+      }
+    });
+    this.setState({
+      toDoList: newTodoList,
     });
   }
   render() {
@@ -69,9 +86,14 @@ export default class ToDoList extends Component {
         </form>
 
         <div className="todo-container">
-          <ul className="todo-list" id="todo">
+          <ul className="todo-list">
             {this.state.toDoList.map((todo) => (
-              <ToDo key={todo.id} {...todo} remove={this.removeToDo} />
+              <ToDo
+                key={todo.id}
+                {...todo}
+                remove={this.removeToDo}
+                complete={this.completeToDo}
+              />
             ))}
           </ul>
         </div>

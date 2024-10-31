@@ -6,13 +6,18 @@ export default class ToDo extends Component {
   delete(id) {
     this.props.remove(id);
   }
-
+  done(id) {
+    this.props.complete(id);
+  }
   render() {
     return (
       // 'completed' class for completed todos
-      <div className="todo" style={{ display: "flex" }}>
+      <div
+        className={`todo ${this.props.completed ? "completed" : ""}`}
+        style={{ display: "flex" }}
+      >
         <li className="todo-item">{this.props.title}</li>
-        <button className="check-btn">
+        <button className="check-btn" onClick={() => this.done(this.props.id)}>
           <FontAwesomeIcon icon={faCheck} />
         </button>
 
